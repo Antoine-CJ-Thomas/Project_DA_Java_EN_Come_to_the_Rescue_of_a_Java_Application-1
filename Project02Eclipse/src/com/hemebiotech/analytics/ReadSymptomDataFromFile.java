@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Simple brute force implementation
- *
+ * This class read the symptom list from a file (Simple brute force
+ * implementation)
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
