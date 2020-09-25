@@ -1,34 +1,35 @@
 package com.hemebiotech.analytics;
 
-import java.util.List;
 import java.util.TreeMap;
 
 public class AnalyticsCounter {
 
-	private TreeMap<String, Integer> symptomHashMap = new TreeMap<String, Integer>(); 
+	private ReadSymptomDataFromFile symptomReader;
+	private WriteSymptomDataToFile symptomWriter;
 
-	public AnalyticsCounter() {
+	private TreeMap<String, Integer> symptomTreeMap = new TreeMap<String, Integer>();
 
+	public AnalyticsCounter(String filePathIn, String filePathOut) {
+
+		symptomReader = new ReadSymptomDataFromFile(filePathIn);
+		symptomWriter = new WriteSymptomDataToFile(filePathOut);
 	}
 
-	public void symptomCounting(List<String> inputList) {
-		
-		for (String s : inputList) {
+	public void symptomCounting() {
 
-			if (symptomHashMap.containsKey(s) == false) {
+		for (String s : symptomReader.getSymptoms()) {
 
-				symptomHashMap.put(s, 1);
+			if (symptomTreeMap.containsKey(s) == false) {
+
+				symptomTreeMap.put(s, 1);
 			}
-			
+
 			else {
-				
-				symptomHashMap.put(s, symptomHashMap.get(s) + 1);
+
+				symptomTreeMap.put(s, symptomTreeMap.get(s) + 1);
 			}
 		}
-	}
 
-	public TreeMap<String, Integer> getSymptomList() {
-
-		return symptomHashMap;
+		symptomWriter.writeSymptoms(symptomTreeMap);
 	}
 }
