@@ -24,9 +24,11 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
 	@Override
 	public void writeSymptoms(TreeMap<String, Integer> symptomTreeMap) {
 
+		FileWriter writer = null;
+		
 		try {
 
-			FileWriter writer = new FileWriter(filepath);
+			writer = new FileWriter(filepath);
 
 			for (Entry<String, Integer> entry : symptomTreeMap.entrySet()) {
 
@@ -35,10 +37,24 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
 				writer.write(entry.getKey() + " : " + entry.getValue() + "\n");
 			}
 
-			writer.close();
-
 		} catch (IOException e) {
+			
 			e.printStackTrace();
+			
+		} finally {
+			
+	        if (writer != null) {
+	        	
+	            try {
+	            	
+	            	writer.close();
+					
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+					
+				}
+	          }
 		}
 	}
 }

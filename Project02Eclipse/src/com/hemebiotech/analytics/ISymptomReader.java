@@ -11,6 +11,7 @@ import java.util.List;
  * 
  */
 public interface ISymptomReader {
+
 	/**
 	 * Read all data of a file then return it in a list (if no data is available, return an empty List)
 	 * 
