@@ -23,7 +23,6 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
 
 	@Override
 	public void writeSymptoms(TreeMap<String, Integer> symptomTreeMap) {
-
 		FileWriter writer = null;
 		
 		try {
